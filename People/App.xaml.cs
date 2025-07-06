@@ -1,18 +1,19 @@
-﻿namespace People;
+﻿using System.Security.Cryptography.X509Certificates;
+namespace People;
 
 public partial class App : Application
 {
-	public static PersonRepository PersonRepo { get; private set; }
+    public static PersonRepository PersonRepo { get; private set; }
 
-	public App()
-	{
-		InitializeComponent();
-		// TODO: Initialize the PersonRepository property with the PersonRespository singleton object
+    public App(PersonRepository repo)
+    {
+        InitializeComponent();
+        // Initialize the PersonRepository property with the provided repository instance
+        PersonRepo = repo;
+    }
 
-	}
-
-	protected override Window CreateWindow(IActivationState activationState)
-	{
-		return new Window(new AppShell());
-	}
+    protected override Window CreateWindow(IActivationState activationState)
+    {
+        return new Window(new AppShell());
+    }
 }
